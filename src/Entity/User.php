@@ -47,9 +47,21 @@ class User implements UserInterface
      */
     private $lastname;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Organization", inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $organization;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Activity", mappedBy="masterUserId")
+     */
+    private $activities;
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
+        $this->activities = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -161,6 +173,49 @@ class User implements UserInterface
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getOrganization(): ?self
+    {
+        return $this->organization;
+    }
+
+    public function setOrganization(?self $organization): self
+    {
+        $this->organization = $organization;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Activity[]
+     */
+    public function getActivities(): Collection
+    {
+        return $this->activities;
+    }
+
+    public function addActivity(Activity $activity): self
+    {
+        if (!$this->activities->contains($activity)) {
+            $this->activities[] = $activity;
+            $activity->setMasterUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActivity(Activity $activity): self
+    {
+        if ($this->activities->contains($activity)) {
+            $this->activities->removeElement($activity);
+            // set the owning side to null (unless already changed)
+            if ($activity->getMasterUserId() === $this) {
+                $activity->setMasterUserId(null);
+            }
+        }
 
         return $this;
     }
