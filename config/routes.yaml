@@ -12,3 +12,10 @@ app_logout:
 signUp:
     path: /signup
     controller: App\Controller\SecurityController::signUp
+
+
+## AdminController
+
+createOrg:
+    path: /admin/createOrg
+    controller: App\Controller\AdminController::createOrg

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\creationForms;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
@@ -11,6 +11,9 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use App\Entity\Organization;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class SignUpFormType extends AbstractType
 {
@@ -26,6 +29,11 @@ class SignUpFormType extends AbstractType
                     'second_options' => array('label' => 'Repeat Password')
                 ]
                 )
+            ->add('organization', EntityType::class,
+            [
+               'choice_label' => 'Organzation',
+               'class' => Organization::class 
+            ])    
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class);
 

@@ -1,6 +1,5 @@
 
 ###> symfony/framework-bundle ###
-.env
 /public/bundles/
 /var/
 /vendor/
@@ -14,6 +13,13 @@
 ###> symfony/web-server-bundle ###
 /.web-server-pid
 ###< symfony/web-server-bundle ###
+
+###>config files ###
+.env
 .env.test
-composer.json
+###<config files ###
+
+###> project build configuration ###
 composer.lock
+symfony.lock
+###< project build configuration ###
