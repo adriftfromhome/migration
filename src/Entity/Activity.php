@@ -42,10 +42,6 @@ class Activity
      */
     private $endDate;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $recurring;
 
     public function getId(): ?int
     {
@@ -108,18 +104,6 @@ class Activity
     public function setEndDate(\DateTimeInterface $endDate): self
     {
         $this->endDate = $endDate;
-
-        return $this;
-    }
-
-    public function getRecurring(): ?string
-    {
-        return $this->recurring;
-    }
-
-    public function setRecurring(string $recurring): self
-    {
-        $this->recurring = $recurring;
 
         return $this;
     }
