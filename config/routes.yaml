@@ -1,21 +1,21 @@
 index: 
     path: /
-    controller: App\Controller\DefaultController::index
+    controller: App\Controller\WebController\DefaultController::index
 
 app_login:
     path: /login
-    controller: App\Controller\SecurityController::login
+    controller: App\Controller\WebController\SecurityController::login
 
 app_logout:
     path: /logout
 
 signUp:
     path: /signup
-    controller: App\Controller\SecurityController::signUp
+    controller: App\Controller\WebController\SecurityController::signUp
 
 
 ## AdminController
 
 createOrg:
     path: /admin/createOrg
-    controller: App\Controller\AdminController::createOrg
+    controller: App\Controller\WebController\AdminController::createOrg
