@@ -1,0 +1,24 @@
+<script>
+    let inviteUrl = '{{ url('invite') }}';
+</script>
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Logo</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>
+                <a href="{{ url('invite') }}">Invite a User</a>
+            </li>
+            <li>
+                <a href="{{ url('organization') }}">Organization</a>
+            </li>
+            <li>
+                <a href="collapsible.html">JavaScript</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+{% block javascript %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+{% endblock %}

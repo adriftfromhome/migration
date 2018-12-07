@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div id="message"></div>
+<div id="errors"></div>
+<form id='my-form' method="post">
+    <div>
+        <label for="inputName">Name</label>
+        <input type="text" name="name" id="inputName">
+    </div>
+
+    <div>
+        <label for="inputLanguage">Language</label>
+        <input type="text" name="language" id="inputLanguage">
+    </div>
+
+    <div>
+        <label for="inputLogo">Logo</label>
+        <input type="file" name="image" id="inputLogo">
+    </div>
+
+    <div>
+        <label for="inputEmail">Invite Organization Admin</label>
+        <input type="email" name="email" id="inputLogo">
+    </div>
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('create-org') }}">
+    <input id='test' type="submit" value="Sign Up">
+</form>
+{% endblock %}
+{% block javascript %}
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script type="text/javascript">let url='{{ url('postOrganization') }}';</script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js"></script>
+    <script src="{{ asset('js/createOrg.js') }}"></script>
+{% endblock %}

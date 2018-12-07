@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OrganizationRepository")
@@ -20,6 +21,7 @@ class Organization
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @JMS\Groups({"public"})
      */
     private $name;
 
@@ -44,18 +46,18 @@ class Organization
     private $users;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Department", mappedBy="organization", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\UserInvite", mappedBy="organization")
      */
-    private $departments;
+    private $userInvites;
 
     public function __construct()
     {
         $this->masterUserId = new ArrayCollection();
         $this->users = new ArrayCollection();
-        $this->departments = new ArrayCollection();
+        $this->userInvites = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -159,30 +161,30 @@ class Organization
     }
 
     /**
-     * @return Collection|Department[]
+     * @return Collection|UserInvite[]
      */
-    public function getDepartments(): Collection
+    public function getUserInvites(): Collection
     {
-        return $this->departments;
+        return $this->userInvites;
     }
 
-    public function addDepartment(Department $department): self
+    public function addUserInvite(UserInvite $userInvite): self
     {
-        if (!$this->departments->contains($department)) {
-            $this->departments[] = $department;
-            $department->setOrganization($this);
+        if (!$this->userInvites->contains($userInvite)) {
+            $this->userInvites[] = $userInvite;
+            $userInvite->setOrganization($this);
         }
 
         return $this;
     }
 
-    public function removeDepartment(Department $department): self
+    public function removeUserInvite(UserInvite $userInvite): self
     {
-        if ($this->departments->contains($department)) {
-            $this->departments->removeElement($department);
+        if ($this->userInvites->contains($userInvite)) {
+            $this->userInvites->removeElement($userInvite);
             // set the owning side to null (unless already changed)
-            if ($department->getOrganization() === $this) {
-                $department->setOrganization(null);
+            if ($userInvite->getOrganization() === $this) {
+                $userInvite->setOrganization(null);
             }
         }
 

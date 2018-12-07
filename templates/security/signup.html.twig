@@ -7,9 +7,31 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
+{# TODO: change action to a dynamic generated url #}
+<form action="http://localhost:8000/api/user/create" method="post">
+    <div>
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input value="{{ token.getEmail }}" type="email"  name="email" id="inputEmail" class="form-control" placeholder="Email" required="required" autofocus="autofocus">
+    </div>
+    
+    <div>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
+    </div>
 
-{{ form_start(form) }}
-{{ form_widget(form) }}
-{{ form_end(form) }}
+    <div>
+        <label for="inputFirstname">Firstname</label>
+        <input type="text" name="firstname" id="inputFirstname">
+    </div>
+    
+    <div>
+        <label for="inputLastname">Lastname</label>
+        <input type="text" name="lastname" id="inputLastname">
+    </div>
+    
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('create-user') }}">
+    <input type="hidden" name="inviteToken" value="{{ token.getToken }}">
+    <input type="submit" value="Sign Up">
+</form>
 
 {% endblock %}
